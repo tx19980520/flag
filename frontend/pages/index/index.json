@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-button": "vant-weapp/button/index",
+    "van-tabbar": "/vant-weapp/tabbar/index",
+    "van-tabbar-item": "/vant-weapp/tabbar-item/index",
+    "van-dialog": "/vant-weapp/dialog/index",
+    "van-loading": "/vant-weapp/loading/index",
+    "van-tag": "/vant-weapp/tag/index",
+    "van-panel": "vant-weapp/panel/index",
+    "van-row": "/vant-weapp/row/index",
+    "van-col": "/vant-weapp/col/index"
+  }
+}

@@ -1,0 +1,64 @@
+<!--index.wxml-->
+<view>
+  <van-dialog id="van-dialog" />
+  <van-row class="b-t-200">
+    <van-col offset="11" span="4">
+      <view wx:if="{{ !getJWC || !getXSB }}">
+        <van-loading type="spinner" />
+      </view>
+    </van-col>
+  </van-row>
+
+  <view wx:if="{{ getJWC && getXSB }}">
+
+    <view class="m-t-30">
+      <van-tag size="large" mark type="primary">教务处</van-tag>
+
+      <view wx:for="{{jwcNews}}" wx:key="item" wx:for-index="index">
+        <van-row>
+          <van-col offset="2" span="20">
+            <van-panel>
+              <view slot="header">
+                <view class="m-b-20 van-ellipsis">
+                  {{ item.title }}
+                </view>
+              </view>
+              <!-- <van-button data-type="{{ item.type }}" data-url="{{ item.url }}" size="small" bind:click="openUrl">
+                详情
+              </van-button> -->
+            </van-panel>
+          </van-col>
+        </van-row>
+      </view>
+    </view>
+
+    <view class="m-t-30">
+      <van-tag size="large" mark type="success">学生办</van-tag>
+
+      <view wx:for="{{xsbNews}}" wx:key="item" wx:for-index="index">
+        <van-row>
+          <van-col offset="2" span="20">
+            <van-panel>
+              <view slot="header">
+                <view class="m-b-20 van-ellipsis">
+                  {{ item.title }}
+                </view>
+              </view>
+                <van-button data-type="{{ item.type }}" data-url="{{ item.url }}" size="mini" bind:click="openUrl">
+                  详情
+                </van-button>
+            </van-panel>
+          </van-col>
+        </van-row>
+        </view>
+        </view>
+      </view>
+
+
+      <van-tabbar active="{{ active }}" bind:change="tabSwitch">
+        <van-tabbar-item icon="newspaper-o">news</van-tabbar-item>
+        <!--<van-tabbar-item icon="flag-o" >flag</van-tabbar-item>
+    <van-tabbar-item icon="setting-o" >settings</van-tabbar-item>
+    -->
+      </van-tabbar>
+    </view>

@@ -1,0 +1,3 @@
+/**app.wxss**/
+@import "/weui.wxss";
+@import "/miniprogram_npm/vant-weapp/common/index.wxss";

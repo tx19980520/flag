@@ -1,0 +1,10 @@
+/**index.wxss**/
+.b-t-200{
+  padding: 300px;
+}
+.m-t-30{
+  margin-top: 30px;
+}
+.m-b-20{
+  margin-bottom: 20px;
+}
