@@ -8,5 +8,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "交大时讯",
     "navigationBarTextStyle": "black"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
