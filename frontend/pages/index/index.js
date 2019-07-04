@@ -26,6 +26,7 @@ Page({
   //事件处理函数
   tabSwitch(event) {
     let xm = this;
+    console.log(event)
     switch (event.detail)
     {
       case 0:
@@ -36,6 +37,7 @@ Page({
         this.getNews('xsb').then(data => {
           xm.setData({xsbNews: data, getXSB: true})
         })
+        break;
       }
       case 1:
       {
@@ -44,12 +46,16 @@ Page({
             message: '暂未开通,敬请期待'
           }).then(() => {
             console.log('sss')
+            console.log(xm.data.active)
             xm.setData({ active : 0})
             console.log(xm.data.active)
           });
+          break;
       }
       default:{
-
+        console.log('sss')
+        xm.setData({ active: 0 })
+        console.log(xm.data.active)
       }
     }
   },

@@ -1,24 +1,18 @@
-// pages/navigator/navigator.js
+// pages/account/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    url : ""
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.url)
-    if (options.url) {
-      this.setData({
-        // 设置当前链接
-        url: options.url
-      })
-    } 
+
   },
 
   /**
@@ -67,6 +61,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    console.log("share")
+
   }
 })
