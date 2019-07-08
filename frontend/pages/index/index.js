@@ -47,14 +47,14 @@ Page({
           }).then(() => {
             console.log('sss')
             console.log(xm.data.active)
-            xm.setData({ active : 0})
+            // xm.setData({ active : 0})
             console.log(xm.data.active)
           });
           break;
       }
       default:{
         console.log('sss')
-        xm.setData({ active: 0 })
+        // xm.setData({ active: 0 })
         console.log(xm.data.active)
       }
     }
