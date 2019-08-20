@@ -1,0 +1,23 @@
+<!-- pages/login/login.wxml -->
+<view>
+    <view wx:if="{{!hasUserInfo && canIUse}}" class="hint">
+        <text>本小程序仅对上海交通大学校友开放，首先请登录您的微信账号哦~</text>
+    </view>
+    <view class="userinfo">
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">
+            登录微信账户
+        </button>
+        <block wx:else>
+            <image bindtap="bindViewTap" src="{{userInfo.avatarUrl}}" mode="cover" class="userinfo-avatar"></image>
+            <text class="userinfo-nickname">Hi, {{userInfo.nickName}}</text>
+        </block>
+    </view>
+    <view wx:if="{{hasUserInfo && !hasJaccount}}" bindtap="bindJaccount" class="userinfo">
+        <text>您还没有绑定 JAccount</text>
+        <button id="btn_bind" hidden="{{btnBindClicked}}" style="margin: 20rpx">绑定我的JAccount</button>
+        <text hidden="{{!btnBindClicked || qrCodeFailed}}">请长按保存下面的二维码，扫一扫登录哟~</text>
+        <text hidden="{{!qrCodeFailed}}">加载失败，重启试试？</text>
+        <canvas class='canvas' canvas-id='loginQrCode' bindlongtap='save' style="width: {{qrCodeWidth}}px; height: {{qrCodeWidth}}px; margin: 15rpx"></canvas>
+        <!-- <canvas wx:if="{{debug}}" class='canvas' canvas-id='canvas' bindlongtap='save'></canvas> -->
+    </view>
+</view>
