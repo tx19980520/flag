@@ -20,14 +20,15 @@ Page({
     hasBindUrl: false,
     btnBindClicked: false,
     qrCodeWidth: qrCodeWidth,
-    btnBindClicked: false,
     qrCodeFailed: false,
+    qrCodeLoaded: false,
     debug: true
   },
 
   bindViewTap: function () {
 
   },
+
   getUserInfo: function (e) {
     this.setData({
       userInfo: e.detail.userInfo,
@@ -36,60 +37,68 @@ Page({
   },
 
   bindJaccount: function (e) {
-    this.setData({ btnBindClicked: true });
+    this.setData({
+      btnBindClicked: true
+    })
     wx.showLoading({
       title: '加载中',
     })
-    console.log('bind Jaccount')
-    console.log(app.globalData.userCode)
-    var code = app.globalData.userCode
-    var page = this
-    wx.request(
-      {
-        // url: "http://localhost:800/get_code",   // local debug
-        url: "https://collect.seiee.com/get_code",  // production
-        method: "GET",
-        header: {
-          "content-type": "application/json",
-          "host": "collect.seiee.com"
-        },
-        data: { "code": code },
-        success: function (res) {
-          console.log("[debug] get response: " + res.data)
-          if (res.data == bindFlag){
-            // the user has successfully bind his/her Jaccount
-            console.log('JAccount is already bind');
-            wx.hideLoading();
-            wx.redirectTo({
-              url: '../index/index',
-            })
-            return;
-          }
-          page.setData({ hasBindUrl: true })
-          qrCode = new QRCode('loginQrCode', {
-            // usingIn: this,
-            text: res.data,
-            width: qrCodeWidth,
-            height: qrCodeWidth,
-            colorDark: "#000000",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H,
-          });
-          console.log('qrcode is refreshed');
-          wx.hideLoading();
-          console.log('loading is hidden');
-        },
-        fail: (res => {
-          page.setData({qrCodeFailed: true});
-          wx.hideLoading();
-          console.log('request failed');
+    console.log(app.globalData.userCode);
+    var code = app.globalData.userCode;
+    var page = this;
+    wx.request({
+      url: "http://localhost:8000/get_code", // local debug
+      // url: "https://collect.seiee.com/get_code",  // production
+      method: "GET",
+      header: {
+        "content-type": "application/json",
+        "host": "collect.seiee.com"
+      },
+      data: {
+        "code": code
+      },
+      success: function (res) {
+        page.setData({
+          qrCodeFailed: false
         })
-      }
-    )
+        console.log("[debug] get response: " + res.data);
+        if (res.data == bindFlag) {
+          // the user has successfully bind his/her Jaccount
+          console.log('JAccount is already bind');
+          wx.hideLoading();
+          wx.redirectTo({
+            url: '../index/index',
+          })
+          return;
+        }
+        page.setData({
+          hasBindUrl: true
+        })
+        qrCode = new QRCode('loginQrCode', {
+          // usingIn: this,
+          text: res.data,
+          width: qrCodeWidth,
+          height: qrCodeWidth,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H,
+        });
+        wx.hideLoading();
+        page.setData({
+          qrCodeLoaded: true
+        })
+      },
+      fail: (res => {
+        page.setData({
+          qrCodeFailed: true
+        });
+        wx.hideLoading();
+        console.log('request failed');
+      })
+    })
   },
 
   save: function () {
-    console.log('save')
     wx.showActionSheet({
       itemList: ['保存图片'],
       success: function (res) {
@@ -103,19 +112,12 @@ Page({
       }
     })
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // qrCode = new QRCode('canvas', {
-    //   // usingIn: this,
-    //   text: "https://github.com/tomfriwel/weapp-qrcode",
-    //   width: 150,
-    //   height: 150,
-    //   colorDark: "#000000",
-    //   colorLight: "#ffffff",
-    //   correctLevel: QRCode.CorrectLevel.H,
-    // });
+
   },
 
   /**
